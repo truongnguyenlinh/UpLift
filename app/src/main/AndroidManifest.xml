@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SignInActivity"></activity>
-        <activity android:name=".SetPreferencesActivity" />
+        <activity android:name=".GetFrequencyActivity"></activity>
+        <activity android:name=".SignInActivity" />
+        <activity android:name=".GetNameActivity" />
         <activity android:name=".SignUpActivity" />
         <activity
             android:name=".SplashActivity"

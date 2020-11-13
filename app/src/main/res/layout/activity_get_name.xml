@@ -5,22 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SetPreferencesActivity">
+    tools:context=".GetNameActivity">
 
-    <TextView
-        android:id="@+id/textViewProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="@string/set_preferences"
-        android:textColor="@color/colorPrimaryDark"
-        android:textAppearance="?android:attr/textAppearanceLarge"/>
+
     <TextView
         android:id="@+id/TextViewName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/name"
         android:textColor="@color/colorPrimaryDark"/>
+
     <EditText
         android:id="@+id/EditTextName"
         android:layout_width="match_parent"
@@ -29,22 +23,13 @@
         android:inputType="textPersonName|textCapSentences"
         android:hint="@string/name_hint"/>
 
-    <Spinner
-        android:id="@+id/spinnerFrequency"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="@android:color/transparent"
-        android:gravity="center"
-        android:layout_marginStart="5dp"
-        android:spinnerMode="dropdown"
-        android:entries="@array/frequency"/>
+
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/done"
-        android:id="@+id/btnDone"
+        android:text="@string/next"
+        android:id="@+id/btnNext"
         android:layout_marginTop="10dp"
         android:textColor="@color/colorPrimaryDark"/>
 
