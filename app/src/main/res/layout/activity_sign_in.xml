@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:stretchColumns="1">
+        <TextView
+            android:id="@+id/SignIn"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/sign_in_msg"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"
+            style="?android:attr/listSeparatorTextViewStyle"/>
+        <EditText
+            android:id="@+id/SignInMail"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/SignInPass"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:hint="@string/password"
+            android:inputType="textPassword"/>
+        <Button
+            android:id="@+id/SignInButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"/>
+        <TextView
+            android:id="@+id/noAccount"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:text="@string/no_account"
+            android:onClick="signUpScreen"
+            android:clickable="true"
+            android:gravity="center"
+            android:textColor="@color/colorPrimaryDark"/>
+
+    </TableLayout>
+</LinearLayout>

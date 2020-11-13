@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">UpLift</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="register">Register To UpLift</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="sign_in_msg">Sign In to UpLift</string>
+    <string name="sign_in">Sign In</string>
+    <string name="set_preferences">Set Preferences</string>
+    <string name="name">Name:</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="done">Done</string>
+    <string name="no_account">I don\'t have an account yet</string>
+
+    <array name="frequency">
+        <item>Every Hour</item>
+        <item>Every 2 Hours</item>
+        <item>Every 4 Hours</item>
+        <item>Every 8 Hours</item>
+        <item>Once a Day</item>
+    </array>
 </resources>

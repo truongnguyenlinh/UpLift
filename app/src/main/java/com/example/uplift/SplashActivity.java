@@ -1,11 +1,15 @@
 package com.example.uplift;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -19,9 +23,26 @@ public class SplashActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        //Check current user
+        FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+        firebaseAuth.addAuthStateListener(authStateListener);
 
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        finish();
     }
+    FirebaseAuth.AuthStateListener authStateListener = new FirebaseAuth.AuthStateListener() {
+        @Override
+        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+            FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+
+            if (firebaseUser == null) {
+                Intent intent = new Intent(SplashActivity.this, SignInActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            if (firebaseUser != null) {
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+    };
 }
