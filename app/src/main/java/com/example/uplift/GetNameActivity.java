@@ -20,10 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class GetNameActivity extends AppCompatActivity {
 
-    private Button btnDone;
+    private Button btnNext;
     private FirebaseAuth firebaseAuth;
-    private DatabaseReference databaseReference;
-    private TextView tvNamePrompt;
     private EditText editTextName;
 
     public GetNameActivity() {
@@ -37,25 +35,27 @@ public class GetNameActivity extends AppCompatActivity {
             finish();
             startActivity(new Intent(getApplicationContext(),SignInActivity.class));
         }
-        databaseReference = FirebaseDatabase.getInstance().getReference();
-//        tvNamePrompt = findViewById(R.id.tvNamePrompt);
-        editTextName = findViewById(R.id.EditTextName);
-        btnDone = findViewById(R.id.btnNext);
 
-        btnDone.setOnClickListener(new View.OnClickListener() {
+        editTextName = findViewById(R.id.nameEditText);
+        btnNext = findViewById(R.id.btnNext);
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setUserName();
-                startActivity(new Intent(GetNameActivity.this, GetFrequencyActivity.class));
+                String name = editTextName.getText().toString().trim();
+                Intent intent = new Intent(GetNameActivity.this, GetFrequencyActivity.class);
+                intent.putExtra("name", name);
+//                setUserName();
+                startActivity(intent);
             }
         });
 
     }
-    private void setUserName(){
-        String name = editTextName.getText().toString().trim();
-
-        UserPreference userPreference = new UserPreference(name);
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        databaseReference.child(user.getUid()).setValue(userPreference);
-    }
+//    private void setUserName(){
+//        String name = editTextName.getText().toString().trim();
+//
+//        UserPreference userPreference = new UserPreference(name);
+//        FirebaseUser user = firebaseAuth.getCurrentUser();
+//        databaseReference.child(user.getUid()).setValue(userPreference);
+//    }
 }

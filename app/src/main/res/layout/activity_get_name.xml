@@ -9,28 +9,43 @@
 
 
     <TextView
-        android:id="@+id/TextViewName"
-        android:layout_width="match_parent"
+        android:id="@+id/tvNamePrompt"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/name"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_marginTop="165dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/name_prompt"
+        android:textColor="@color/upliftBlue"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        tools:ellipsize="start" />
 
     <EditText
-        android:id="@+id/EditTextName"
-        android:layout_width="match_parent"
+        android:id="@+id/nameEditText"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName|textCapSentences"
-        android:hint="@string/name_hint"/>
+        android:layout_gravity="center_horizontal"
+        android:background="@android:color/transparent"
+        android:layout_marginTop="110dp"
+        android:textSize="20sp"
+        android:textColor="@color/upliftBlue"
+        android:typeface="serif"
+        android:textStyle="bold"
+        android:ellipsize="start"
+        android:gravity="center_horizontal"
+        android:hint="@string/name_hint" />
 
 
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:text="@string/next"
         android:id="@+id/btnNext"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:layout_marginTop="90dp"
+        android:background="@drawable/my_button"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

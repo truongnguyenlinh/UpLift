@@ -13,7 +13,7 @@
     <string name="done">Done</string>
     <string name="no_account">I don\'t have an account yet</string>
     <string name="name_prompt">What is your name?</string>
-    <string name="frequency_prompt">How often would you like to receive Uplift content?</string>
+    <string name="frequency_prompt">How often would you like to receive UpLift content?</string>
     <string name="next">Next</string>
 
     <array name="frequency">

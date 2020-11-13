@@ -9,33 +9,40 @@
 
     <TextView
         android:id="@+id/tvFrequencyPrompt"
-        android:layout_width="wrap_content"
+        android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="125dp"
+        android:layout_gravity="center_horizontal"
         android:text="@string/frequency_prompt"
+        android:textAlignment="center"
         android:textColor="@color/upliftBlue"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:typeface="serif"
         tools:ellipsize="start" />
 
     <Spinner
         android:id="@+id/spinnerFrequency"
-        android:layout_width="match_parent"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:layout_marginStart="5dp"
-        android:spinnerMode="dropdown"
-        android:entries="@array/frequency"/>
+        android:textColor="@color/upliftBlue"
+        android:textSize="30sp"
+        android:entries="@array/frequency"
+        />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90dp"
         android:text="@string/next"
         android:id="@+id/btnNext"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:background="@drawable/my_button"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

@@ -5,7 +5,7 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/uplift_title">
+            android:src="@drawable/uplift_logo">
         </bitmap>
     </item>
 </layer-list>
