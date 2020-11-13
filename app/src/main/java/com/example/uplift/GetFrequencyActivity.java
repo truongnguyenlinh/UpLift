@@ -23,11 +23,15 @@ public class GetFrequencyActivity extends AppCompatActivity {
     private FirebaseAuth firebaseAuth;
     private DatabaseReference databaseReference;
     private Spinner spinnerFrequency;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_frequency);
+
+        Intent intent = getIntent();
+        name = intent.getStringExtra("name");
 
         firebaseAuth=FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null){
@@ -47,16 +51,15 @@ public class GetFrequencyActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               setPreferences();
-                startActivity(new Intent(GetFrequencyActivity.this, MainActivity.class));
+                setPreferences();
+                Intent intent = new Intent(GetFrequencyActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
 
     private void setPreferences(){
         FirebaseUser user = firebaseAuth.getCurrentUser();
-        Intent intent = getIntent();
-        String name = intent.getStringExtra("name");
         String frequencyString = spinnerFrequency.getSelectedItem().toString();
 
         UserPreference userPreference = new UserPreference(name, FrequencyToInt(frequencyString));

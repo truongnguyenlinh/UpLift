@@ -54,8 +54,8 @@ public class SignInActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (!task.isSuccessful()) {
                                     // there was an error
-                                    if (password.length() < 6) {
-                                        Toast.makeText(getApplicationContext(),"Passwords are at least 6 characters.",Toast.LENGTH_SHORT).show();
+                                    if (password.length() < 8) {
+                                        Toast.makeText(getApplicationContext(),"Passwords are at least 8 characters.",Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(getApplicationContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();
                                     }

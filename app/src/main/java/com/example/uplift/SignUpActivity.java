@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +46,7 @@ public class SignUpActivity extends AppCompatActivity {
                 if(TextUtils.isEmpty(pass)){
                     Toast.makeText(getApplicationContext(),"Please enter your Password",Toast.LENGTH_LONG).show();
                 }
-                if (pass.length() < 6 ){
+                if (pass.length() < 8 ){
                     Toast.makeText(getApplicationContext(),"Password must be at least 8 characters",Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -54,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     if (!task.isSuccessful()) {
-                                        Toast.makeText(SignUpActivity.this, "Something",Toast.LENGTH_LONG).show();
+                                        Toast.makeText(SignUpActivity.this, "Something went wrong",Toast.LENGTH_LONG).show();
                                     }
                                     else {
                                         startActivity(new Intent(SignUpActivity.this, GetNameActivity.class));
