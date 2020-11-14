@@ -7,6 +7,19 @@
     android:orientation="vertical"
     tools:context=".GetFrequencyActivity">
 
+<!--    <TextView-->
+<!--        android:id="@+id/tvHiUser"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="125dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/upliftBlue"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:typeface="serif"-->
+<!--        tools:ellipsize="start" />-->
+
     <TextView
         android:id="@+id/tvFrequencyPrompt"
         android:layout_width="340dp"
