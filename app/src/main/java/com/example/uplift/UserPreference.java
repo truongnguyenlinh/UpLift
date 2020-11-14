@@ -1,12 +1,13 @@
 package com.example.uplift;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserPreference {
 
     public String name;
     public int frequency; // in minutes
-    public ArrayList<String> categories;
+    public List<String> categories;
 
     public UserPreference(){
     }
@@ -27,7 +28,7 @@ public class UserPreference {
     }
 
     // constructor with categories as param
-    public UserPreference(String name, int frequency, ArrayList<String> categories){
+    public UserPreference(String name, int frequency, List<String> categories){
         this.name = name;
         this.frequency = frequency;
         this.categories = categories;
@@ -49,7 +50,7 @@ public class UserPreference {
         this.frequency = frequency;
     }
 
-    public ArrayList<String> getCategories() {
+    public List<String> getCategories() {
         return categories;
     }
 

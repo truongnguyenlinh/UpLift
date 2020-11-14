@@ -51,6 +51,8 @@ public class Category {
         return this.isSelected;
     }
 
+    public void setIsSelected(boolean isSelected) { this.isSelected = isSelected; }
+
     public static Category[] getAllCategories() {
         return categories;
     }

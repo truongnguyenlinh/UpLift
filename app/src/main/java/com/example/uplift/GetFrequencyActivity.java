@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -48,33 +47,37 @@ public class GetFrequencyActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setPreferences();
-                Intent intent = new Intent(GetFrequencyActivity.this, MainActivity.class);
+                String frequencyString = spinnerFrequency.getSelectedItem().toString();
+                int frequency = frequencyToInt(frequencyString);
+
+//                setPreferences();
+                Intent intent = new Intent(GetFrequencyActivity.this, ContentSelectionActivity.class);
+                intent.putExtra("name", name);
+                intent.putExtra("frequency", frequency);
+
                 startActivity(intent);
             }
         });
     }
 
-    private void setPreferences(){
-        FirebaseUser user = firebaseAuth.getCurrentUser();
-        String frequencyString = spinnerFrequency.getSelectedItem().toString();
-
-        UserPreference userPreference = new UserPreference(name, FrequencyToInt(frequencyString));
-        databaseReference.child(user.getUid()).setValue(userPreference);
-    }
-
-    private int FrequencyToInt(String frequency) {
+    private int frequencyToInt(String frequency) {
         int frequencyMinutes = 0;
-        if (frequency.equals("Every Hour")) {
-            frequencyMinutes = 60;
-        } else if (frequency.equals("Every 2 Hours")) {
-            frequencyMinutes = 120;
-        } else if (frequency.equals("Every 4 Hours")) {
-            frequencyMinutes = 240;
-        } else if (frequency.equals("Every 8 Hours")) {
-            frequencyMinutes = 480;
-        } else if (frequency.equals("Once a Day")) {
-            frequencyMinutes = 1440;
+        switch (frequency) {
+            case "Every Hour":
+                frequencyMinutes = 60;
+                break;
+            case "Every 2 Hours":
+                frequencyMinutes = 120;
+                break;
+            case "Every 4 Hours":
+                frequencyMinutes = 240;
+                break;
+            case "Every 8 Hours":
+                frequencyMinutes = 480;
+                break;
+            case "Once a Day":
+                frequencyMinutes = 1440;
+                break;
         }
         return frequencyMinutes;
     }

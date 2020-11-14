@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import java.util.concurrent.TimeUnit;
+
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -24,6 +26,8 @@ public class SplashActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         //Check current user
+        FirebaseApp.initializeApp(getApplicationContext());
+
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
         firebaseAuth.addAuthStateListener(authStateListener);
 

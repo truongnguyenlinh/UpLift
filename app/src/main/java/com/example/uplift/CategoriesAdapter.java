@@ -1,8 +1,6 @@
 package com.example.uplift;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.transition.TransitionManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +12,11 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.List;
-
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
     private String[] categoryNames;
     private int[] imageIds;
-    int mExpandedPosition = -1;
 
     public CategoriesAdapter(String[] categoryNames, int[] imageIds) {
         this.categoryNames = categoryNames;
@@ -51,7 +46,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-//        super.onBindViewHolder(holder, position, payloads);
 
         final CardView cardView = holder.cardView;
 
@@ -66,21 +60,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
         ImageView ivCheckMark = cardView.findViewById(R.id.check_mark);
         ivCheckMark.setVisibility(View.INVISIBLE);
-
-
-
-//        final boolean isExpanded = position==mExpandedPosition;
-//        cardView.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-//        cardView.setActivated(isExpanded);
-//        cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mExpandedPosition = isExpanded ? -1 : position;
-//                TransitionManager.beginDelayedTransition(cardView);
-//                notifyDataSetChanged();
-//            }
-//        });
-
 
         cardView.setOnClickListener(new View.OnClickListener() {
             public Boolean selected = false;
