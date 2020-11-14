@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">UpLift</string>
+    <string name="btnFinish">FINISH</string>
 </resources>
