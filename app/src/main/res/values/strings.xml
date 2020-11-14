@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">UpLift</string>
+    <string name="btnFinish">FINISH</string>
     <string name="sign_up">Sign Up</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
