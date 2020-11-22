@@ -18,6 +18,7 @@
     <string name="next">Next</string>
 
     <array name="frequency">
+        <item>Every 5 seconds</item>
         <item>Every Hour</item>
         <item>Every 2 Hours</item>
         <item>Every 4 Hours</item>

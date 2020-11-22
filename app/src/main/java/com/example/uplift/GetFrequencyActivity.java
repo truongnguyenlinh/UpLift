@@ -54,6 +54,7 @@ public class GetFrequencyActivity extends AppCompatActivity {
                 Intent intent = new Intent(GetFrequencyActivity.this, ContentSelectionActivity.class);
                 intent.putExtra("name", name);
                 intent.putExtra("frequency", frequency);
+                intent.putExtra("frequencyString", frequencyString);
 
                 startActivity(intent);
             }
@@ -61,24 +62,27 @@ public class GetFrequencyActivity extends AppCompatActivity {
     }
 
     private int frequencyToInt(String frequency) {
-        int frequencyMinutes = 0;
+        int frequencyMilliseconds = 0;
         switch (frequency) {
+            case "Every 5 seconds":
+                frequencyMilliseconds = 5000;
+                break;
             case "Every Hour":
-                frequencyMinutes = 60;
+                frequencyMilliseconds = 3600000;
                 break;
             case "Every 2 Hours":
-                frequencyMinutes = 120;
+                frequencyMilliseconds = 7200000;
                 break;
             case "Every 4 Hours":
-                frequencyMinutes = 240;
+                frequencyMilliseconds = 14400000;
                 break;
             case "Every 8 Hours":
-                frequencyMinutes = 480;
+                frequencyMilliseconds = 28800000;
                 break;
             case "Once a Day":
-                frequencyMinutes = 1440;
+                frequencyMilliseconds = 86400000;
                 break;
         }
-        return frequencyMinutes;
+        return frequencyMilliseconds;
     }
 }

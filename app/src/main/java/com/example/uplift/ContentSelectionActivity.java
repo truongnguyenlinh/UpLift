@@ -1,5 +1,7 @@
 package com.example.uplift;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,12 +15,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class ContentSelectionActivity extends AppCompatActivity {
@@ -30,6 +34,7 @@ public class ContentSelectionActivity extends AppCompatActivity {
     List<String> selectedCategories;
     Button btnFinish;
     String name;
+    String frequencyString;
     int frequency;
 
     protected void onCreate(Bundle savedInstance) {
@@ -42,6 +47,7 @@ public class ContentSelectionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         frequency = intent.getIntExtra("frequency", 60);
+        frequencyString = intent.getStringExtra("frequencyString");
         selectedCategories = new ArrayList<>();
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -93,6 +99,7 @@ public class ContentSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 setPreferences();
+                startAlert();
                 Intent intent = new Intent(ContentSelectionActivity.this, MainActivity.class);
                 startActivity(intent);
             }
@@ -104,5 +111,17 @@ public class ContentSelectionActivity extends AppCompatActivity {
         UserPreference userPreference = new UserPreference(name, frequency, selectedCategories);
         databaseReference.child(user.getUid()).setValue(userPreference);
 
+    }
+
+    public void startAlert() {
+            Intent intent = new Intent(this, MyBroadcastReceiver.class);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                    this.getApplicationContext(), 280192, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+            alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis() + frequency, frequency
+                    , pendingIntent);
+
+            Toast.makeText(this, "You Will Be UpLifted " + frequencyString + "!",
+                    Toast.LENGTH_LONG).show();
     }
 }

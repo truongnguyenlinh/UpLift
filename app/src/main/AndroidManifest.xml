@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.uplift">
+    <uses-permission android:name="android.permission.SET_ALARM"/>
 
     <application
         android:allowBackup="true"
@@ -23,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ContentSelectionActivity"></activity>
+        <activity android:name=".ContentSelectionActivity" />
+        <receiver android:name=".MyBroadcastReceiver" />
     </application>
 
 </manifest>
