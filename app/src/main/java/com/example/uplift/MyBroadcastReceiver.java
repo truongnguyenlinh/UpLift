@@ -12,6 +12,7 @@ import android.graphics.BitmapFactory;
 import android.os.Vibrator;
 import android.util.Log;
 import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
@@ -45,7 +46,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
         NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.createNotificationChannel(channel);
-        Notification notification = getTextNotification();
+        Notification notification = getImageNotification();
         notifManager.notify(NOTIFICATION_ID, notification);
         Log.e("ERROR", "Notification sent");
     }
@@ -65,14 +66,17 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     }
 
     public Notification getTextNotification() {
+        notificationLayout.setTextViewText(R.id.notification_text, "Get Outside!");
+
+        notificationLayoutExpanded.setTextViewText(R.id.notification_text_expanded, "Get Outside!");
+        notificationLayoutExpanded.setTextViewText(R.id.notification_text_main_expanded, "Have you gone " +
+                "outside today? Fresh air boosts your serotonin for a better mood!");
+
         NotificationCompat.Builder textNotification = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.small_icon)
-                .setContentTitle("Uplift Category!")
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-//                .setCustomContentView(notificationLayout)
-                .setStyle(new NotificationCompat.BigTextStyle()
-                        .bigText("Have you gone outside today? Fresh air boosts your serotonin for a better mood!"))
-//                .setCustomBigContentView(notificationLayoutExpanded)
+                .setCustomContentView(notificationLayout)
+                .setCustomBigContentView(notificationLayoutExpanded)
                 .setContentIntent(actionPendingIntent);
 
         Log.e("ERROR", "Inside text notification");
@@ -80,17 +84,18 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     }
     public Notification getImageNotification() {
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.drawable.dog);
-        Notification imageNotification = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID)
-                .setSmallIcon(R.drawable.uplift_logo)
-                .setLargeIcon(bitmap)
+        notificationLayout.setTextViewText(R.id.notification_text, "Open Me!");
+        notificationLayout.setImageViewBitmap(R.id.notification_image, bitmap);
+
+        notificationLayoutExpanded.setImageViewBitmap(R.id.notification_image_expanded, bitmap);
+
+        NotificationCompat.Builder imageNotification = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID)
+                .setSmallIcon(R.drawable.small_icon)
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
-                .setStyle(new NotificationCompat.BigPictureStyle()
-                        .setBigContentTitle("Category")
-                        .bigPicture(bitmap)
-                        .bigLargeIcon(null))
-//                .setCustomBigContentView(notificationLayoutExpanded)
-                .build();
-        return imageNotification;
+                .setCustomContentView(notificationLayout)
+                .setCustomBigContentView(notificationLayoutExpanded)
+                .setContentIntent(actionPendingIntent);
+        return imageNotification.build();
     }
 }
 //public class MyBroadcastReceiver extends BroadcastReceiver {
