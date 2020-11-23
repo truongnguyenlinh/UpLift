@@ -15,6 +15,8 @@
     <string name="frequency_prompt">How often would you like to receive UpLift content?</string>
     <string name="next">Next</string>
     <string name="log_out">Log Out</string>
+    <string name="join">Join the</string>
+    <string name="community">UpLift Community</string>
 
     <array name="frequency">
         <item>Every Half Hour</item>
