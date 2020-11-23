@@ -65,7 +65,7 @@ public class GetFrequencyActivity extends AppCompatActivity {
         int frequencyMilliseconds = 0;
         switch (frequency) {
             case "Every 5 seconds":
-                frequencyMilliseconds = 5000;
+                frequencyMilliseconds = 1000;
                 break;
             case "Every Hour":
                 frequencyMilliseconds = 3600000;
