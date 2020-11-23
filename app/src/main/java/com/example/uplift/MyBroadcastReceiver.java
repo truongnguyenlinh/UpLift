@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Vibrator;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
@@ -26,11 +27,14 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle("UpLift")
-                .setContentText("Have you done outside today? Fresh air boosts your serotonin for a better mood!")
+                .setContentText("Have you gone outside today? Fresh air boosts your serotonin for a better mood!")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVibrate(new long[] {0, 1000})
                 .setContentIntent(actionPendingIntent)
+                .setTimeoutAfter(300000)
+                .setOngoing(true)
                 .setAutoCancel(false);
+
 
         NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID,
                 NOTIFICATION_CHANNEL_ID+"_name",
@@ -38,7 +42,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
 
         NotificationManager notifManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         notifManager.createNotificationChannel(channel);
-
+        Log.e("ERROR", "Sending notification");
         notifManager.notify(NOTIFICATION_ID, builder.build());
     }
 }

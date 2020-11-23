@@ -1,13 +1,11 @@
 <resources>
     <string name="app_name">UpLift</string>
     <string name="btnFinish">FINISH</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_up">Register</string>
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
-    <string name="register">Register To UpLift</string>
     <string name="already_have_account">I already have an account</string>
-    <string name="sign_in_msg">Sign In to UpLift</string>
-    <string name="sign_in">Sign In</string>
+    <string name="sign_in">Log In</string>
     <string name="set_preferences">Set Preferences</string>
     <string name="name">Name:</string>
     <string name="name_hint">Enter your name</string>
@@ -16,9 +14,10 @@
     <string name="name_prompt">What is your name?</string>
     <string name="frequency_prompt">How often would you like to receive UpLift content?</string>
     <string name="next">Next</string>
+    <string name="log_out">Log Out</string>
 
     <array name="frequency">
-        <item>Every 5 seconds</item>
+        <item>Every Half Hour</item>
         <item>Every Hour</item>
         <item>Every 2 Hours</item>
         <item>Every 4 Hours</item>

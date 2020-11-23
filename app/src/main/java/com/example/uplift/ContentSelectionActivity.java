@@ -110,13 +110,12 @@ public class ContentSelectionActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         UserPreference userPreference = new UserPreference(name, frequency, selectedCategories);
         databaseReference.child(user.getUid()).setValue(userPreference);
-
     }
 
     public void startAlert() {
             Intent intent = new Intent(this, MyBroadcastReceiver.class);
             PendingIntent pendingIntent = PendingIntent.getBroadcast(
-                    this.getApplicationContext(), 280192, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+                    this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
             AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
             alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis() + frequency, frequency
                     , pendingIntent);
