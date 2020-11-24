@@ -4,14 +4,18 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +36,11 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseUser user;
     Button btnLogOut;
+    Button btnSettings;
     TextView welcome;
     String name;
+    int frequency;
+    String frequencyString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         welcome = findViewById(R.id.welcome);
         btnLogOut = findViewById(R.id.btnLogOut);
+        btnSettings = findViewById(R.id.btnSettings);
+
+        Intent intent = getIntent();
+        frequencyString = intent.getStringExtra("frequencyString");
 
         firebaseAuth=FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null){
@@ -48,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),SignInActivity.class));
         }
         user = firebaseAuth.getCurrentUser();
-        databaseReference = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("name/");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child(user.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                name = dataSnapshot.getValue(String.class);
+                name = dataSnapshot.child("name").getValue(String.class);
+                frequency = dataSnapshot.child("frequency").getValue(int.class);
                 welcome.setText("Welcome " + name + "!");
             }
 
@@ -73,6 +85,79 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnSettings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showUpdateDialog();
+            }
+        });
+    }
+
+    private int getIndex(Spinner spinner, String myString){
+        for (int i=0;i<spinner.getCount();i++){
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(myString)){
+                return i;
+            }
+        }
+        return 0;
+    }
+
+    public void showUpdateDialog() {
+
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        final View dialogView = inflater.inflate(R.layout.settings_dialog, null);
+        dialogBuilder.setView(dialogView);
+
+        final EditText editTextUserName = dialogView.findViewById(R.id.editTextUserName);
+        editTextUserName.setText(name);
+
+        final Spinner spinnerSettingsFrequency = dialogView.findViewById(R.id.spinnerSettingsFrequency);
+        spinnerSettingsFrequency.setSelection(getIndex(spinnerSettingsFrequency, frequencyToString(frequency)));
+
+        final Button btnUpdate = dialogView.findViewById(R.id.btnUpdate);
+        dialogBuilder.setTitle("Update Settings");
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String name = editTextUserName.getText().toString().trim();
+
+                if (TextUtils.isEmpty(name)) {
+                    editTextUserName.setError("Name is required");
+                    return;
+                }
+            }
+
+        });
+    }
+
+    private String frequencyToString(int frequency) {
+        String frequencyString = "";
+        switch (frequency) {
+            case 1800000:
+                frequencyString = "Every Half Hour";
+                break;
+            case 3600000:
+                frequencyString = "Every Hour";
+                break;
+            case 7200000:
+                frequencyString = "Every 2 Hours";
+                break;
+            case 14400000:
+                frequencyString = "Every 4 Hours";
+                break;
+            case 28800000:
+                frequencyString = "Every 8 Hours";
+                break;
+            case 86400000:
+                frequencyString = "Once a Day";
+                break;
+        }
+        return frequencyString;
     }
 
     public void stopNotifications() {

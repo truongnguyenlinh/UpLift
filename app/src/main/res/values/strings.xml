@@ -17,6 +17,9 @@
     <string name="log_out">Log Out</string>
     <string name="join">Join the</string>
     <string name="community">UpLift Community</string>
+    <string name="settings">Settings</string>
+    <string name="update">Update</string>
+    <string name="frequency_milliseconds">Frequency (Milliseconds):</string>
 
     <array name="frequency">
         <item>Every Half Hour</item>
