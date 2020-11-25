@@ -125,13 +125,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = editTextUserName.getText().toString().trim();
+                String frequency = spinnerSettingsFrequency.getSelectedItem().toString().trim();
 
-                if (TextUtils.isEmpty(name)) {
-                    editTextUserName.setError("Name is required");
-                    return;
-                }
+                databaseReference.child("name").setValue(name);
+                databaseReference.child("frequency").setValue(frequencyToInt(frequency));
+                alertDialog.dismiss();
             }
-
         });
     }
 
@@ -158,6 +157,31 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         return frequencyString;
+    }
+
+    private int frequencyToInt(String frequency) {
+        int frequencyMilliseconds = 0;
+        switch (frequency) {
+            case "Every Half Hour":
+                frequencyMilliseconds = 1800000;
+                break;
+            case "Every Hour":
+                frequencyMilliseconds = 3600000;
+                break;
+            case "Every 2 Hours":
+                frequencyMilliseconds = 7200000;
+                break;
+            case "Every 4 Hours":
+                frequencyMilliseconds = 14400000;
+                break;
+            case "Every 8 Hours":
+                frequencyMilliseconds = 28800000;
+                break;
+            case "Once a Day":
+                frequencyMilliseconds = 86400000;
+                break;
+        }
+        return frequencyMilliseconds;
     }
 
     public void stopNotifications() {
