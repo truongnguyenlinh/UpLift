@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity" />
-        <activity android:name=".ContentSelectionActivity" />
+        <activity android:name=".ContentSelectionActivity"
+            android:label="@string/choose_categories"/>
         <receiver android:name=".MyBroadcastReceiver" />
     </application>
 
