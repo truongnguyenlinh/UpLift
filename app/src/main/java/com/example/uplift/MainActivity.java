@@ -8,20 +8,19 @@ import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -29,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     String name;
     int frequency;
     String frequencyString;
+    List<String> selectedCategories;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         frequencyString = intent.getStringExtra("frequencyString");
+        selectedCategories = new ArrayList<>();
 
         firebaseAuth=FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null){
@@ -116,6 +119,40 @@ public class MainActivity extends AppCompatActivity {
         final Spinner spinnerSettingsFrequency = dialogView.findViewById(R.id.spinnerSettingsFrequency);
         spinnerSettingsFrequency.setSelection(getIndex(spinnerSettingsFrequency, frequencyToString(frequency)));
 
+        final ListView listView = dialogView.findViewById(R.id.settingsContent);
+
+        final List<String> categories = new ArrayList<>();
+        Category[] allCategories = Category.getAllCategories();
+        for (Category category: allCategories) {
+            categories.add(category.getName());
+        }
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, categories);
+
+        listView.setAdapter(dataAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                SparseBooleanArray clickedItemPositions = listView.getCheckedItemPositions();
+                for(int index = 0; index < clickedItemPositions.size();index++){
+                    boolean checked = clickedItemPositions.valueAt(index);
+                    int key = clickedItemPositions.keyAt(index);
+                    String item = (String) listView.getItemAtPosition(key);
+
+                    if (checked) {
+                        listView.getChildAt(key).setBackgroundColor(getResources().getColor(R.color.blueTheme));
+                        if (!selectedCategories.contains(item)){
+                            selectedCategories.add(item);
+                        }
+                    } else {
+                        listView.getChildAt(key).setBackgroundColor(Color.TRANSPARENT);
+                        selectedCategories.remove(item);
+                    }
+                }
+            }
+        });
+
         final Button btnUpdate = dialogView.findViewById(R.id.btnUpdate);
         dialogBuilder.setTitle("Update Settings");
         final AlertDialog alertDialog = dialogBuilder.create();
@@ -127,8 +164,8 @@ public class MainActivity extends AppCompatActivity {
                 String name = editTextUserName.getText().toString().trim();
                 String frequency = spinnerSettingsFrequency.getSelectedItem().toString().trim();
 
-                databaseReference.child("name").setValue(name);
-                databaseReference.child("frequency").setValue(frequencyToInt(frequency));
+                UserPreference userPreference = new UserPreference(name, frequencyToInt(frequency), selectedCategories);
+                databaseReference.setValue(userPreference);
                 alertDialog.dismiss();
             }
         });

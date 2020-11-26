@@ -20,6 +20,12 @@
         android:layout_height="wrap_content"
         android:entries="@array/frequency" />
 
+    <ListView
+        android:id="@+id/settingsContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="multipleChoice" />
+
     <Button
         android:id="@+id/btnUpdate"
         android:layout_width="match_parent"
