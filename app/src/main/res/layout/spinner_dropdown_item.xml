@@ -8,4 +8,4 @@
     android:textAlignment="center"
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:ellipsize="marquee"
-    android:textColor="@color/blueTheme"/>
+    android:textColor="@color/grey"/>
