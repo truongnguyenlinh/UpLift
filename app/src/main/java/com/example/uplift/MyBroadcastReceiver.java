@@ -33,6 +33,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     RemoteViews notificationLayout;
     RemoteViews notificationLayoutExpanded;
     Context mContext;
+    Intent actionIntent;
     PendingIntent actionPendingIntent;
 
     ArrayList<String> categories;
@@ -68,16 +69,14 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
                 Log.d("ERROR", "The read failed: " + databaseError.getCode());
             }
         });
-
-
     }
 
     private void sendNotification(Context context) {
-        Intent actionIntent = new Intent(context, MainActivity.class);
+        actionIntent = new Intent(context, OpenedNotificationActivity.class);
         mContext = context;
 
-        actionPendingIntent = PendingIntent.getActivity(context, 0,
-                actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+//        actionPendingIntent = PendingIntent.getActivity(context, 0,
+//                actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         notificationLayout = new RemoteViews("com.example.uplift",
                 R.layout.notification_small);
@@ -94,17 +93,24 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         String randomCategory = getRandomCategory();
 
         // create notification
-        Notification notification = isImageCategory(randomCategory) ? getImageNotification(randomCategory) : getTextNotification(randomCategory);
+        Notification notification = isImageCategory(randomCategory) ? getImageNotification(randomCategory, context) : getTextNotification(randomCategory, context);
         notifManager.createNotificationChannel(channel);
         notifManager.notify(NOTIFICATION_ID, notification);
     }
 
-    public Notification getTextNotification(String category) {
+    public Notification getTextNotification(String category, Context context) {
         notificationLayout.setTextViewText(R.id.notification_text, category + "!");
         notificationLayoutExpanded.setTextViewText(R.id.notification_text_expanded, category + "!");
 
         String content = (String) getContent(category);
         notificationLayoutExpanded.setTextViewText(R.id.notification_text_main_expanded, content);
+
+        // Prepare action intent
+        actionIntent.putExtra("category", category);
+        actionIntent.putExtra("text", content);
+
+        actionPendingIntent = PendingIntent.getActivity(context, 0,
+                actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder textNotification = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.small_icon)
@@ -116,14 +122,23 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         return textNotification.build();
     }
 
-    public Notification getImageNotification(String category) {
+    public Notification getImageNotification(String category, Context context) {
         notificationLayout.setTextViewText(R.id.notification_text, "Open Me!");
-        Integer content = (Integer) getContent(category);
+        int content = (int) getContent(category);
 
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), content);
         notificationLayout.setImageViewBitmap(R.id.notification_image, bitmap);
 
         notificationLayoutExpanded.setImageViewBitmap(R.id.notification_image_expanded, bitmap);
+
+        // Prepare action intent
+        actionIntent.putExtra("category", category);
+        actionIntent.putExtra("img", content);
+
+        Log.e("ERROR", String.valueOf(content));
+
+        actionPendingIntent = PendingIntent.getActivity(context, 0,
+                actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder imageNotification = new NotificationCompat.Builder(mContext, NOTIFICATION_CHANNEL_ID)
                 .setSmallIcon(R.drawable.small_icon)
