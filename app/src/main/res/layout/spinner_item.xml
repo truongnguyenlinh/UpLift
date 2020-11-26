@@ -9,4 +9,4 @@
     android:textStyle="bold"
     android:textAlignment="center"
     android:elevation="2dp"
-    android:textColor="@color/blueTheme" />
+    android:textColor="@color/grey" />

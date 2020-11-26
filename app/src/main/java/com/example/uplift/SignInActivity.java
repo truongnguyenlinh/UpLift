@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,42 +46,62 @@ public class SignInActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
+        SignInPass.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if (event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        userSignIn();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
         SignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = SignInMail.getText().toString();
-                final String password = SignInPass.getText().toString();
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Enter your mail address", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Enter your password", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                //authenticate user
-                auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (!task.isSuccessful()) {
-                                    // there was an error
-                                    if (password.length() < 8) {
-                                        Toast.makeText(getApplicationContext(),"Passwords are at least 8 characters.",Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        Toast.makeText(getApplicationContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();
-                                    }
-                                } else {
-                                    restartNotifications();
-                                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            }
-                        });
+                userSignIn();
             }
         });
+
+    }
+
+    public void userSignIn() {
+        String email = SignInMail.getText().toString();
+        final String password = SignInPass.getText().toString();
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(getApplicationContext(), "Enter your mail address", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(getApplicationContext(), "Enter your password", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        //authenticate user
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(SignInActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!task.isSuccessful()) {
+                            // there was an error
+                            if (password.length() < 8) {
+                                Toast.makeText(getApplicationContext(),"Passwords are at least 8 characters.",Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getApplicationContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            restartNotifications();
+                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                    }
+                });
     }
 
     public void signUpScreen(View v) {

@@ -44,12 +44,6 @@ public class ContentSelectionActivity extends AppCompatActivity {
         categoryRecycler = findViewById(R.id.category_recycler);
         btnFinish = findViewById(R.id.btnFinish);
 
-        Intent intent = getIntent();
-        name = intent.getStringExtra("name");
-        frequency = intent.getIntExtra("frequency", 60);
-        frequencyString = intent.getStringExtra("frequencyString");
-        selectedCategories = new ArrayList<>();
-
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() == null) {
             finish();
@@ -57,8 +51,13 @@ public class ContentSelectionActivity extends AppCompatActivity {
         }
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
-        categories = Category.getAllCategories();
+        Intent intent = getIntent();
+        name = intent.getStringExtra("name");
+        frequency = intent.getIntExtra("frequency", 60);
+        frequencyString = intent.getStringExtra("frequencyString");
 
+        selectedCategories = new ArrayList<>();
+        categories = Category.getAllCategories();
         String[] categoryNames = new String[categories.length];
         int[] categoryImages = new int[categories.length];
         for (int i = 0; i < categories.length; i++) {

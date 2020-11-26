@@ -43,7 +43,7 @@
         android:textAlignment="center"
         android:background="@android:color/transparent"
         android:gravity="center"
-        android:textColor="@color/upliftBlue"
+        android:textColor="@color/grey"
         android:textSize="30sp"
         android:entries="@array/frequency"
         />

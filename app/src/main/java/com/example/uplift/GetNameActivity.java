@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,23 +40,33 @@ public class GetNameActivity extends AppCompatActivity {
         editTextName = findViewById(R.id.nameEditText);
         btnNext = findViewById(R.id.btnNext);
 
+        editTextName.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                        enterName();
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
+
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = editTextName.getText().toString().trim();
-                Intent intent = new Intent(GetNameActivity.this, GetFrequencyActivity.class);
-                intent.putExtra("name", name);
-//                setUserName();
-                startActivity(intent);
+                enterName();
             }
         });
 
     }
-//    private void setUserName(){
-//        String name = editTextName.getText().toString().trim();
-//
-//        UserPreference userPreference = new UserPreference(name);
-//        FirebaseUser user = firebaseAuth.getCurrentUser();
-//        databaseReference.child(user.getUid()).setValue(userPreference);
-//    }
+
+    public void enterName() {
+        String name = editTextName.getText().toString().trim();
+        Intent intent = new Intent(GetNameActivity.this, GetFrequencyActivity.class);
+        intent.putExtra("name", name);
+        startActivity(intent);
+    }
+
 }

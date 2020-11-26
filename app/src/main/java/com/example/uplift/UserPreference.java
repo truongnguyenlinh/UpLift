@@ -6,7 +6,7 @@ import java.util.List;
 public class UserPreference {
 
     public String name;
-    public int frequency; // in minutes
+    public int frequency; // in milliseconds
     public List<String> categories;
 
     public UserPreference(){
