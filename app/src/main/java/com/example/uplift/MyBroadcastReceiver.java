@@ -126,6 +126,8 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         notificationLayout.setTextViewText(R.id.notification_text, "Open Me!");
         int content = (int) getContent(category);
 
+        Log.e("ERROR", "In Notification: " + content);
+
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), content);
         notificationLayout.setImageViewBitmap(R.id.notification_image, bitmap);
 
@@ -134,8 +136,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         // Prepare action intent
         actionIntent.putExtra("category", category);
         actionIntent.putExtra("img", content);
-
-        Log.e("ERROR", String.valueOf(content));
 
         actionPendingIntent = PendingIntent.getActivity(context, 0,
                 actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
