@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("ERROR", "The read failed: " + databaseError.getCode());
             }
         });
-        welcome.setText("Welcome.. ");
+        welcome.setText("Welcome...");
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override

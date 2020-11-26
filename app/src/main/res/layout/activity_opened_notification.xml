@@ -6,32 +6,26 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-<!--    <TextView-->
-<!--        android:id="@+id/opened_notification_title"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center_vertical"-->
-<!--        android:layout_marginStart="10dp"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textSize="28sp"-->
-<!--        android:gravity="center"-->
-<!--        android:textFontWeight="600"/>-->
-
     <TextView
         android:id="@+id/opened_notification_content"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="10dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:gravity="center"
+        android:text="Have you gone outside today? Don't forget to go get some fresh air and your daily dose of Vitamin D!"
         android:textColor="@color/blueTheme"
-        android:textSize="24sp"
-        android:textAlignment="center"/>
+        android:textSize="27sp"
+        android:textStyle="bold"
+        android:typeface="serif" />
 
     <ImageView
         android:id="@+id/opened_notification_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="10dp"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
 
 </LinearLayout>
