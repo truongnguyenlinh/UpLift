@@ -100,6 +100,7 @@ public class ContentSelectionActivity extends AppCompatActivity {
                 setPreferences();
                 startAlert();
                 Intent intent = new Intent(ContentSelectionActivity.this, MainActivity.class);
+                intent.putExtra("frequencyString", frequencyString);
                 startActivity(intent);
             }
         });
