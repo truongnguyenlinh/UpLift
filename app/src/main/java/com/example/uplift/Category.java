@@ -14,6 +14,7 @@ public class Category {
     private boolean isImage;
 
 
+
     private Category(String name, Boolean isImage, int imageResourceId) {
         this.name = name;
 //        this.subCategories = subCategories;
