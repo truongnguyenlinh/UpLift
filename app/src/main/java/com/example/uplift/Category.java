@@ -7,8 +7,6 @@ import java.util.Arrays;
 
 public class Category {
     private String name;
-//    private String parentCategory;
-//    private Category[] subCategories;
     private int imageResourceId;
     private boolean isSelected;
     private boolean isImage;
@@ -17,9 +15,7 @@ public class Category {
 
     private Category(String name, Boolean isImage, int imageResourceId) {
         this.name = name;
-//        this.subCategories = subCategories;
         this.isImage = isImage;
-//        this.subCategories = null;
         this.imageResourceId = imageResourceId;
         this.isSelected = false;
     }
@@ -56,22 +52,6 @@ public class Category {
     public static Category[] getAllCategories() {
         return categories;
     }
-
-//    public static Category[] getSubCategories(String categoryName) {
-//        ArrayList<Category> categoryList = new ArrayList<>();
-//        categoryList.addAll(Arrays.asList(categories[0].subCategories));
-//        for (int i = 0; i < categories.length; i++ ) {
-//            String parentName = categories[i].getName();
-//            Log.d("DEBUG", "HI");
-//            if (parentName.equals(categoryName)) {
-//                categoryList.addAll(Arrays.asList(categories[i].subCategories));
-//                Log.d("DEBUG", "HELLO");
-//            }
-//        }
-//
-//        Category[] subCategories = categoryList.toArray(new Category[categoryList.size()]);
-//        return subCategories;
-//    }
 
 
 }
