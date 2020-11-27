@@ -8,6 +8,10 @@
 <color name="upliftBlue">#34C6EB</color>
 <color name="white">#FBFEFF</color>
 <color name="grey">#808383</color>
+<color name="transparent_grey">#555556</color>
+<color name="transparent">#00000000</color>
 <color name="offWhite">#CDFBFEFF</color>
+<color name="darkerWhite">#FBFEFF</color>
+
 
 </resources>

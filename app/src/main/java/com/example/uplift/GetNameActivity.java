@@ -1,15 +1,22 @@
 package com.example.uplift;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -58,10 +65,39 @@ public class GetNameActivity extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enterName();
+                showInfoDialog();
+//                enterName();
             }
         });
 
+    }
+
+    public void showInfoDialog() {
+        Log.d("ERROR", "Inside showInfoDialog");
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+
+        final View dialogView = inflater.inflate(R.layout.info_dialog, null);
+
+        dialogBuilder.setView(dialogView);
+
+        TextView tvTitle = dialogView.findViewById(R.id.info_dialog_title);
+        String str = "Welcome " + editTextName.getText().toString().trim() + "!";
+        tvTitle.setText(str);
+
+        Log.d("ERROR", "Before SHow");
+
+        final Button btn = dialogView.findViewById(R.id.info_dialog_btn);
+
+        final AlertDialog alertDialog = dialogBuilder.create();
+        alertDialog.show();
+
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enterName();
+            }
+        });
     }
 
     public void enterName() {
