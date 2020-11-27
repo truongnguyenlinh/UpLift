@@ -5,6 +5,7 @@ import android.app.PendingIntent;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -121,7 +122,9 @@ public class ContentSelectionActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), frequency
                 , pendingIntent);
 
-        Toast.makeText(this, "You Will Be UpLifted " + frequencyString + "!",
-                Toast.LENGTH_LONG).show();
+        Toast toast = Toast.makeText(this, "You Will Be UpLifted " + frequencyString + "!",
+                Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.TOP, 0, 190);
+        toast.show();
     }
 }

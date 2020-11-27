@@ -91,8 +91,6 @@ public class SignInActivity extends AppCompatActivity {
                             // there was an error
                             if (password.length() < 8) {
                                 Toast.makeText(getApplicationContext(),"Passwords are at least 8 characters.",Toast.LENGTH_SHORT).show();
-                            } else {
-                                Toast.makeText(getApplicationContext(),"Something went wrong.",Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             restartNotifications();
