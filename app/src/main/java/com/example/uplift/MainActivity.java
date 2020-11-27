@@ -80,8 +80,10 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     for (DataSnapshot postSnapShot: dataSnapshot.child("categories").getChildren()) {
                         String category = postSnapShot.getValue(String.class);
-                        selectedCategories.add(category);
-                        Log.e("ERROR", category);
+                        if (!selectedCategories.contains(category)) {
+                            selectedCategories.add(category);
+                            Log.e("ERROR", category);
+                        }
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
