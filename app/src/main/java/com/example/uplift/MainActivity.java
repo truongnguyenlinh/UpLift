@@ -73,7 +73,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 name = dataSnapshot.child("name").getValue(String.class);
-                frequency = dataSnapshot.child("frequency").getValue(int.class);
+                try {
+                    frequency = dataSnapshot.child("frequency").getValue(int.class);
+                } catch (NullPointerException e) {
+                    Log.d("ERROR", "The user is missing user preferences.");
+                    Toast.makeText(MainActivity.this, "Oops, it looks like your account" +
+                            " is missing some information!", Toast.LENGTH_LONG).show();
+                    finish();
+                    startActivity(new Intent(MainActivity.this, GetNameActivity.class));
+                }
                 if (name != null) {
                     welcome.setText("Welcome " + name + ",");
                 } else {
