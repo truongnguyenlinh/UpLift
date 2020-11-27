@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 name = dataSnapshot.child("name").getValue(String.class);
                 frequency = dataSnapshot.child("frequency").getValue(int.class);
                 if (name != null) {
-                    welcome.setText("Welcome " + name + "!");
+                    welcome.setText("Welcome " + name + ",");
                 } else {
                     welcome.setText("Welcome back!");
                 }
@@ -80,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("ERROR", "The read failed: " + databaseError.getCode());
             }
         });
-        welcome.setText("Welcome...");
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -21,6 +21,8 @@
     <string name="update">Update</string>
     <string name="frequency_milliseconds">Frequency (Milliseconds):</string>
     <string name="choose_categories">Choose Categories</string>
+    <string name="uplift_msg">Life is hard. Everyone could use a little UpLift every once in awhile!</string>
+    <string name="welcome">Welcome...</string>
 
     <array name="frequency">
         <item>Every Half Hour</item>
