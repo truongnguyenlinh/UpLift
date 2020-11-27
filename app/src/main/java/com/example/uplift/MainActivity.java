@@ -66,18 +66,18 @@ public class MainActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference().child(user.getUid());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 name = dataSnapshot.child("name").getValue(String.class);
                 frequency = dataSnapshot.child("frequency").getValue(int.class);
                 if (name != null) {
                     welcome.setText("Welcome " + name + ",");
                 } else {
-                    welcome.setText("Welcome back!");
+                    welcome.setText(R.string.welcome_back);
                 }
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("ERROR", "The read failed: " + databaseError.getCode());
             }
         });
@@ -251,13 +251,13 @@ public class MainActivity extends AppCompatActivity {
         DatabaseReference databaseRefFreq = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("frequency/");
         databaseRefFreq.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 frequency = dataSnapshot.getValue(int.class);
                 startAlert();
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(@NonNull DatabaseError databaseError) {
                 Log.d("ERROR", "The read failed: " + databaseError.getCode());
             }
         });

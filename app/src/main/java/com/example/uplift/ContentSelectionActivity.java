@@ -114,7 +114,6 @@ public class ContentSelectionActivity extends AppCompatActivity {
     }
 
     public void startAlert() {
-
         Intent intent = new Intent(this, MyBroadcastReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(
                 this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);

@@ -75,9 +75,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         actionIntent = new Intent(context, OpenedNotificationActivity.class);
         mContext = context;
 
-//        actionPendingIntent = PendingIntent.getActivity(context, 0,
-//                actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
         notificationLayout = new RemoteViews("com.example.uplift",
                 R.layout.notification_small);
         notificationLayoutExpanded = new RemoteViews("com.example.uplift",
@@ -126,8 +123,6 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
         notificationLayout.setTextViewText(R.id.notification_text, "Open Me!");
         int content = (int) getContent(category);
 
-        Log.e("ERROR", "In Notification: " + content);
-
         Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), content);
         notificationLayout.setImageViewBitmap(R.id.notification_image, bitmap);
 
@@ -158,6 +153,7 @@ public class MyBroadcastReceiver extends BroadcastReceiver {
     private Object getContent(String category) {
         ArrayList<Object> contentArray = Content.contentMap.get(category);
         Random random = new Random();
+        assert contentArray != null;
         int randomInt = random.nextInt(contentArray.size());
         return contentArray.get(randomInt);
     }
