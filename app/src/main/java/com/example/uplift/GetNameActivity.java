@@ -54,7 +54,8 @@ public class GetNameActivity extends AppCompatActivity {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                        enterName();
+                        showInfoDialog();
+//                        enterName();
                         return true;
                     }
                 }
