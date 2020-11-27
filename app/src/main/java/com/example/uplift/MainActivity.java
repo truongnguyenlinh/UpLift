@@ -1,6 +1,7 @@
 package com.example.uplift;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlarmManager;
@@ -14,6 +15,7 @@ import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -144,15 +146,28 @@ public class MainActivity extends AppCompatActivity {
         for (Category category: allCategories) {
             categories.add(category.getName());
         }
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, categories);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, categories) {
+            @NonNull
+            @Override
+            public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+
+                View view = super.getView(position, convertView, parent);
+                String item = categories.get(position);
+                if (selectedCategories.contains(item)) {
+                    view.setBackgroundColor(getResources().getColor(R.color.blueTheme));
+                } else {
+                    view.setBackgroundColor(Color.TRANSPARENT);
+                }
+                return view;
+            }
+        };
 
         listView.setAdapter(dataAdapter);
 
         for (String category: selectedCategories) {
             int position = categoryToPosition(category);
             listView.setItemChecked(position, true);
-//            listView.getChildAt(position).setBackgroundColor(getResources().getColor(R.color.blueTheme));
         }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
