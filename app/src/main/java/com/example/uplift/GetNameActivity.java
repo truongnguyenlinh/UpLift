@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,6 +66,10 @@ public class GetNameActivity extends AppCompatActivity {
 
     public void enterName() {
         String name = editTextName.getText().toString().trim();
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "You must enter a name.", Toast.LENGTH_LONG).show();
+            return;
+        }
         Intent intent = new Intent(GetNameActivity.this, GetFrequencyActivity.class);
         intent.putExtra("name", name);
         startActivity(intent);

@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -203,14 +206,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String name = editTextUserName.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    Toast.makeText(MainActivity.this, "You must enter a name.", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 String frequency = spinnerSettingsFrequency.getSelectedItem().toString().trim();
+
+                if (selectedCategories.isEmpty()) {
+                    Toast.makeText(MainActivity.this, "You must select at least one category.", Toast.LENGTH_LONG).show();
+                    return;
+                }
 
                 UserPreference userPreference = new UserPreference(name, frequencyToInt(frequency), selectedCategories);
                 databaseReference.setValue(userPreference);
                 alertDialog.dismiss();
-                // uncomment these once push new categories to database works
-//                stopNotifications();
-//                restartNotifications();
+                // reset notifications with new settings
+                stopNotifications();
+                restartNotifications();
             }
         });
     }
