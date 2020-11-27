@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TextView welcome;
     String name;
     int frequency;
-    String frequencyString;
+    String position;
     List<String> selectedCategories;
 
     @Override
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         btnSettings = findViewById(R.id.btnSettings);
 
         Intent intent = getIntent();
-        frequencyString = intent.getStringExtra("frequencyString");
+        position = intent.getStringExtra("frequencyString");
         selectedCategories = new ArrayList<>();
 
         firebaseAuth=FirebaseAuth.getInstance();
@@ -74,6 +74,18 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     welcome.setText(R.string.welcome_back);
                 }
+
+                try {
+                    for (DataSnapshot postSnapShot: dataSnapshot.child("categories").getChildren()) {
+                        String category = postSnapShot.getValue(String.class);
+                        selectedCategories.add(category);
+                        Log.e("ERROR", category);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+
             }
 
             @Override
@@ -98,6 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 showUpdateDialog();
             }
         });
+
     }
 
     private int getIndex(Spinner spinner, String myString){
@@ -110,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showUpdateDialog() {
+        Log.e("ERROR", "showUpdateDialog: " + selectedCategories.get(0) );
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -134,6 +148,12 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1, categories);
 
         listView.setAdapter(dataAdapter);
+
+        for (String category: selectedCategories) {
+            int position = categoryToPosition(category);
+            listView.setItemChecked(position, true);
+//            listView.getChildAt(position).setBackgroundColor(getResources().getColor(R.color.blueTheme));
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -176,6 +196,32 @@ public class MainActivity extends AppCompatActivity {
 //                restartNotifications();
             }
         });
+    }
+
+    private int categoryToPosition(String category) {
+        Log.e("ERROR", "categoryToPosition: " + category );
+        int position = 0;
+        switch (category) {
+            case "Animals":
+                position = 0;
+                break;
+            case "Nature":
+                position = 1;
+                break;
+            case "Wellness":
+                position = 2;
+                break;
+            case "Travel":
+                position = 3;
+                break;
+            case "Good News":
+                position = 4;
+                break;
+            case "Exercise":
+                position = 5;
+                break;
+        }
+        return position;
     }
 
     private String frequencyToString(int frequency) {
