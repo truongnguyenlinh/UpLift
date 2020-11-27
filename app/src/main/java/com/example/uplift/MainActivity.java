@@ -29,6 +29,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -170,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
                 UserPreference userPreference = new UserPreference(name, frequencyToInt(frequency), selectedCategories);
                 databaseReference.setValue(userPreference);
                 alertDialog.dismiss();
+                // uncomment these once push new categories to database works
+//                stopNotifications();
+//                restartNotifications();
             }
         });
     }
@@ -232,5 +236,30 @@ public class MainActivity extends AppCompatActivity {
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmManager.cancel(pendingIntent);
+    }
+
+    public void startAlert() {
+        Intent intent = new Intent(this, MyBroadcastReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                this.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), frequency
+                , pendingIntent);
+    }
+
+    private void restartNotifications() {
+        DatabaseReference databaseRefFreq = FirebaseDatabase.getInstance().getReference().child(user.getUid()).child("frequency/");
+        databaseRefFreq.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                frequency = dataSnapshot.getValue(int.class);
+                startAlert();
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.d("ERROR", "The read failed: " + databaseError.getCode());
+            }
+        });
     }
 }
