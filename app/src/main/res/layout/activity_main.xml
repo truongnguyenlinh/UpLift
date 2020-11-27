@@ -31,7 +31,7 @@
         android:paddingHorizontal="47dp"
         android:text="@string/uplift_msg"
         android:textAlignment="center"
-        android:textColor="#5C6060"
+        android:textColor="@color/grey"
         android:textSize="21sp"
         android:textStyle="bold"
         android:typeface="serif"
