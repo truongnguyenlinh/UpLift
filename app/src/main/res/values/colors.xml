@@ -11,7 +11,6 @@
 <color name="transparent_grey">#555556</color>
 <color name="transparent">#00000000</color>
 <color name="offWhite">#CDFBFEFF</color>
+<color name="semi_slate">#8B9C9C9C</color>
 <color name="darkerWhite">#FBFEFF</color>
-
-
 </resources>
