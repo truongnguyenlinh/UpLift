@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
                 View view = super.getView(position, convertView, parent);
                 String item = categories.get(position);
                 if (selectedCategories.contains(item)) {
-                    view.setBackgroundColor(getResources().getColor(R.color.blueTheme));
+                    view.setBackgroundColor(getResources().getColor(R.color.semiBlue));
                 } else {
                     view.setBackgroundColor(Color.TRANSPARENT);
                 }
@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                     String item = (String) listView.getItemAtPosition(key);
 
                     if (checked) {
-                        listView.getChildAt(key).setBackgroundColor(getResources().getColor(R.color.blueTheme));
+                        listView.getChildAt(key).setBackgroundColor(getResources().getColor(R.color.semiBlue));
                         if (!selectedCategories.contains(item)){
                             selectedCategories.add(item);
                         }
@@ -211,6 +211,8 @@ public class MainActivity extends AppCompatActivity {
         final Button btnUpdate = dialogView.findViewById(R.id.btnUpdate);
         dialogBuilder.setTitle("Update Settings");
         final AlertDialog alertDialog = dialogBuilder.create();
+
+        alertDialog.getWindow().setBackgroundDrawableResource(R.drawable.dialog_rounded);
         alertDialog.show();
 
         btnUpdate.setOnClickListener(new View.OnClickListener() {
