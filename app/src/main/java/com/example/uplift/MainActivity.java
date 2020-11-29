@@ -94,7 +94,6 @@ public class MainActivity extends AppCompatActivity {
                         String category = postSnapShot.getValue(String.class);
                         if (!selectedCategories.contains(category)) {
                             selectedCategories.add(category);
-                            Log.e("ERROR", category);
                         }
                     }
                 } catch (Exception e) {
@@ -139,8 +138,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showUpdateDialog() {
-        Log.e("ERROR", "showUpdateDialog: " + selectedCategories.get(0) );
-
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
 
@@ -239,7 +236,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private int categoryToPosition(String category) {
-        Log.e("ERROR", "categoryToPosition: " + category );
         int position = 0;
         switch (category) {
             case "Animals":

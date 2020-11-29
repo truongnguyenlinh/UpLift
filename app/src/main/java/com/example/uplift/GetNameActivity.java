@@ -55,7 +55,6 @@ public class GetNameActivity extends AppCompatActivity {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_ENTER) {
                         showInfoDialog();
-//                        enterName();
                         return true;
                     }
                 }
@@ -67,14 +66,12 @@ public class GetNameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showInfoDialog();
-//                enterName();
             }
         });
 
     }
 
     public void showInfoDialog() {
-        Log.d("ERROR", "Inside showInfoDialog");
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
 
@@ -86,7 +83,6 @@ public class GetNameActivity extends AppCompatActivity {
         String str = "Welcome " + editTextName.getText().toString().trim() + "!";
         tvTitle.setText(str);
 
-        Log.d("ERROR", "Before SHow");
 
         final Button btn = dialogView.findViewById(R.id.info_dialog_btn);
 

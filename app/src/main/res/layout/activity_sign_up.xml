@@ -101,7 +101,6 @@
         android:layout_marginTop="19dp"
         android:clickable="true"
         android:gravity="center"
-        android:onClick="signInScreen"
         android:text="@string/already_have_account"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="15sp"

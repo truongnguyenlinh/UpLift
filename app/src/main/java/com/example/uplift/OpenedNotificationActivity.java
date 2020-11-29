@@ -42,14 +42,11 @@ public class OpenedNotificationActivity extends AppCompatActivity {
         });
 
         if (imgId == -1) {
-            Log.e("ERROR", "Text content");
-
             String textContent = receivedInfo.getStringExtra("text");
             tvContent.setText(textContent);
             mainLayout.setBackgroundColor(Color.WHITE);
             tvContent.setVisibility(View.VISIBLE);
         } else {
-            Log.e("ERROR", String.valueOf(imgId));
             mainLayout.setBackgroundColor(Color.BLACK);
             ivContent.setImageResource(imgId);
             ivContent.setVisibility(View.VISIBLE);

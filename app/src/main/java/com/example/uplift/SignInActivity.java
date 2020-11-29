@@ -14,6 +14,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,6 +35,7 @@ public class SignInActivity extends AppCompatActivity {
     private EditText SignInMail, SignInPass;
     private FirebaseAuth auth;
     private Button SignInButton;
+    private TextView noAccount;
     private int frequency;
 
     @Override
@@ -43,8 +45,16 @@ public class SignInActivity extends AppCompatActivity {
         SignInMail = findViewById(R.id.SignInMail);
         SignInPass = findViewById(R.id.SignInPass);
         SignInButton = findViewById(R.id.SignInButton);
+        noAccount = findViewById(R.id.noAccount);
 
         auth = FirebaseAuth.getInstance();
+
+        noAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);            }
+        });
 
         SignInPass.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -100,11 +110,6 @@ public class SignInActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-
-    public void signUpScreen(View v) {
-        Intent intent = new Intent(this, SignUpActivity.class);
-        startActivity(intent);
     }
 
     public void startAlert() {
