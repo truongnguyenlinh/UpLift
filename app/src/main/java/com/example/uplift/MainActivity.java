@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     frequency = dataSnapshot.child("frequency").getValue(int.class);
                 } catch (NullPointerException e) {
                     Log.d("ERROR", "The user is missing user preferences.");
-                    Toast.makeText(MainActivity.this, "Oops, it looks like your account" +
-                            " is missing some information!", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MainActivity.this, "Oops, it looks like your account" +
+//                            " is missing some information!", Toast.LENGTH_LONG).show();
                     finish();
                     startActivity(new Intent(MainActivity.this, GetNameActivity.class));
                 }
