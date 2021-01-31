@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GetFrequencyActivity">
+
+<!--    <TextView-->
+<!--        android:id="@+id/tvHiUser"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="125dp"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:textAlignment="center"-->
+<!--        android:textColor="@color/upliftBlue"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textStyle="bold"-->
+<!--        android:typeface="serif"-->
+<!--        tools:ellipsize="start" />-->
+
+    <TextView
+        android:id="@+id/tvFrequencyPrompt"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="125dp"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/frequency_prompt"
+        android:textAlignment="center"
+        android:textColor="@color/upliftBlue"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:typeface="serif"
+        tools:ellipsize="start" />
+
+    <Spinner
+        android:id="@+id/spinnerFrequency"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal"
+        android:textAlignment="center"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:textColor="@color/grey"
+        android:textSize="30sp"
+        android:entries="@array/frequency"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="90dp"
+        android:text="@string/next"
+        android:id="@+id/btnNext"
+        android:background="@drawable/my_button"
+        android:textColor="@color/white"/>
+
+</LinearLayout>

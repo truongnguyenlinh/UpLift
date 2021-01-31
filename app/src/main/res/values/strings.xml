@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">UpLift</string>
+    <string name="btnFinish">FINISH</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="sign_in">Log In</string>
+    <string name="set_preferences">Set Preferences</string>
+    <string name="name">Name:</string>
+    <string name="name_hint">Enter your name</string>
+    <string name="done">Done</string>
+    <string name="no_account">I don\'t have an account yet</string>
+    <string name="name_prompt">What is your name?</string>
+    <string name="frequency_prompt">How often would you like to receive UpLift content?</string>
+    <string name="next">Next</string>
+    <string name="log_out">Log Out</string>
+    <string name="join">Join the</string>
+    <string name="community">UpLift Community</string>
+    <string name="settings">Settings</string>
+    <string name="update">Update</string>
+    <string name="welcome_back">Welcome back!</string>
+    <string name="frequency_milliseconds">Frequency (Milliseconds):</string>
+    <string name="latest_uplift">Latest Uplift</string>
+    <string name="choose_categories">Select Content Categories</string>
+    <string name="uplift_msg">Life is hard. Everyone could use a little UpLift every once in awhile!</string>
+    <string name="welcome">Welcome...</string>
+    <string name="back">back</string>
+    <string name="info_dialog_button">Got it!</string>
+    <string name="info_dialog_content_p1">As a new user, we think you should know a little about what UpLift is all about and
+    how you can customize your experience.</string>
+    <string name="info_dialog_content_p2">UpLift is an app designed to give your mental
+    health a boost with positive content of your choosing, delivered to you
+        via notifications throughout the day.</string>
+    <string name="info_dialog_content_p3">You will have the option to select the type of content you would
+        like to see from a list of categories, as well as how often you would like to receive them.
+        Don\'t worry about your choices too much right now, you can always change them later!</string>
+
+
+    <array name="frequency">
+        <item>Every Half Hour</item>
+        <item>Every Hour</item>
+        <item>Every 2 Hours</item>
+        <item>Every 4 Hours</item>
+        <item>Every 8 Hours</item>
+        <item>Once a Day</item>
+    </array>
 </resources>
